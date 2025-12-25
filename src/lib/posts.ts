@@ -6,6 +6,11 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
+console.log("[posts] CWD:", process.cwd());
+console.log("[posts] postsDirectory:", postsDirectory);
+console.log("[posts] exists(postsDirectory):", fs.existsSync(postsDirectory));
+console.log("[posts] files:", fs.existsSync(postsDirectory) ? fs.readdirSync(postsDirectory) : "N/A");
+
 /** frontmatter の型（Markdown側の標準） */
 export type PostFrontMatter = {
   title: string;
