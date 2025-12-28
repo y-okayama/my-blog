@@ -41,15 +41,39 @@ export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = await getPost(slug);
 
-  return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-bold">{post.title}</h1>
-      <div className="mt-2 text-xs text-gray-600">{post.date}</div>
+return (
+  <>
+    {/* === 記事ヘッダー（③） === */}
+    <header className="mb-10">
+      <h1 className="text-3xl font-bold leading-tight">
+        {post.title}
+      </h1>
 
-      <article
-        className="prose prose-neutral mt-8 max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
-    </main>
-  );
+      <div className="mt-2 text-sm opacity-70">
+        {post.date}
+      </div>
+
+      {post.tags?.length ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {post.tags.map((tag: string) => (
+            <span
+              key={tag}
+              className="rounded-full border px-3 py-1 text-xs"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </header>
+
+    {/* === 記事本文（②） === */}
+    <article
+      className="prose prose-neutral max-w-none"
+      dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+    />
+  </>
+);
+
+
 }
